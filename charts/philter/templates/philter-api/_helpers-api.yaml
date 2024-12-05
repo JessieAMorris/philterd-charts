@@ -1,0 +1,22 @@
+{{/*
+api fullname
+*/}}
+{{- define "philter.apiFullname" -}}
+{{ include "philter.fullname" . }}-api
+{{- end }}
+
+{{/*
+api common labels
+*/}}
+{{- define "philter.apiLabels" -}}
+{{ include "philter.labels" . }}
+{{ include "philter.apiSelectorLabels" . }}
+{{- end }}
+
+{{/*
+api selector labels
+*/}}
+{{- define "philter.apiSelectorLabels" -}}
+{{ include "philter.selectorLabels" . }}
+app.kubernetes.io/component: api
+{{- end }}

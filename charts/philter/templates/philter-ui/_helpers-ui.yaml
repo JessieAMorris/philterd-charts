@@ -1,0 +1,22 @@
+{{/*
+ui fullname
+*/}}
+{{- define "philter.uiFullname" -}}
+{{ include "philter.fullname" . }}-ui
+{{- end }}
+
+{{/*
+ui common labels
+*/}}
+{{- define "philter.uiLabels" -}}
+{{ include "philter.labels" . }}
+{{ include "philter.uiSelectorLabels" . }}
+{{- end }}
+
+{{/*
+ui selector labels
+*/}}
+{{- define "philter.uiSelectorLabels" -}}
+{{ include "philter.selectorLabels" . }}
+app.kubernetes.io/component: ui
+{{- end }}

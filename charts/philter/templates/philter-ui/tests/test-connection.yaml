@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "philter.uiFullname" . }}-test-connection"
+  labels:
+    {{- include "philter.uiLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "philter.uiFullname" . }}:{{ .Values.ui.service.port }}']
+  restartPolicy: Never
