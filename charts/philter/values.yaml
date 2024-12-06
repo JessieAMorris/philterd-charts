@@ -202,3 +202,89 @@ ui:
   #   whenUnsatisfiable: ScheduleAnyway
 
   affinity: {}
+
+phEye:
+  enabled: true
+
+  replicaCount: 1
+
+  image:
+    repository: philterd/ph-eye
+    pullPolicy: IfNotPresent
+    tag: "1.2.1"
+
+  podAnnotations: {}
+  podLabels: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  env: []
+
+  apiEndpointOverride:
+
+  service:
+    type: ClusterIP
+    port: 5000
+
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessProbe:
+    httpGet:
+      path: /status
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /status
+      port: http
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  # Additional volumes on the Deployment definition.
+  volumes: []
+  # - name: foo
+  #   secret:
+  #     secretName: mysecret
+  #     optional: false
+
+  # Additional volumeMounts on the output Deployment definition.
+  volumeMounts: []
+  # - name: foo
+  #   mountPath: "/etc/foo"
+  #   readOnly: true
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  topologySpread: {}
+  # zone:
+  #   enabled: false
+  #   maxSkew: 1
+  #   whenUnsatisfiable: ScheduleAnyway
+  # node:
+  #   enabled: false
+  #   maxSkew: 3
+  #   whenUnsatisfiable: ScheduleAnyway
+
+  affinity: {}
