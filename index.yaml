@@ -3,6 +3,16 @@ entries:
   philter:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-06T22:01:41.93659672Z"
+    description: A Helm chart for Kubernetes
+    digest: 9297f61decac727fec237128301cd8c24667200a93522b86e5b170318412066a
+    name: philter
+    type: application
+    urls:
+    - https://github.com/JessieAMorris/philterd-charts/releases/download/philter-0.1.8/philter-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-12-06T21:37:30.269636723Z"
     description: A Helm chart for Kubernetes
     digest: 3738f6151278cbae36006f3c60c0b3aefbb75452715cde29feceee01f7663df5
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/JessieAMorris/philterd-charts/releases/download/philter-0.1.2/philter-0.1.2.tgz
     version: 0.1.2
-generated: "2024-12-06T21:37:30.269667371Z"
+generated: "2024-12-06T22:01:41.936631315Z"
