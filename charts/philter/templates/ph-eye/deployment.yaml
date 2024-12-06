@@ -1,0 +1,79 @@
+{{- if .Values.phEye.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "philter.phEyeFullname" . }}
+  labels:
+    {{- include "philter.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.phEye.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "philter.phEyeSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.phEye.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "philter.phEyeLabels" . | nindent 8 }}
+        {{- with .Values.phEye.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "philter.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.phEye.podSecurityContext | nindent 8 }}
+      containers:
+        - name: philter-ph-eye
+          securityContext:
+            {{- toYaml .Values.phEye.securityContext | nindent 12 }}
+          image: "{{ .Values.phEye.image.repository }}:{{ .Values.phEye.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.phEye.image.pullPolicy }}
+          {{- with .Values.phEye.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.phEye.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.phEye.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.phEye.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.phEye.resources | nindent 12 }}
+          {{- with .Values.phEye.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.phEye.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.phEye.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.phEye.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.phEye.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.phEye.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

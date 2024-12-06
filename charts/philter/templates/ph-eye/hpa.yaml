@@ -1,0 +1,34 @@
+{{- if .Values.phEye.enabled }}
+{{- if .Values.phEye.autoscaling.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "philter.phEyeFullname" . }}
+  labels:
+    {{- include "philter.phEyeLabels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "philter.phEyeFullname" . }}
+  minReplicas: {{ .Values.phEye.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.phEye.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.phEye.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.phEye.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.phEye.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.phEye.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}
+{{- end }}

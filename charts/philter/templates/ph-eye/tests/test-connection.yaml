@@ -1,0 +1,17 @@
+{{- if .Values.phEye.enabled }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "philter.phEyeFullname" . }}-test-connection"
+  labels:
+    {{- include "philter.phEyeLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "philter.phEyeFullname" . }}:{{ .Values.phEye.service.port }}']
+  restartPolicy: Never
+{{- end }}

@@ -1,0 +1,17 @@
+{{- if .Values.phEye.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "philter.phEyeFullname" . }}
+  labels:
+    {{- include "philter.phEyeLabels" . | nindent 4 }}
+spec:
+  type: {{ .Values.phEye.service.type }}
+  ports:
+    - port: {{ .Values.phEye.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "philter.phEyeSelectorLabels" . | nindent 4 }}
+{{- end }}

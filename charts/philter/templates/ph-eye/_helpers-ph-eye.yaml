@@ -1,0 +1,22 @@
+{{/*
+phEye fullname
+*/}}
+{{- define "philter.phEyeFullname" -}}
+{{ include "philter.fullname" . }}-ph-eye-1
+{{- end }}
+
+{{/*
+phEye common labels
+*/}}
+{{- define "philter.phEyeLabels" -}}
+{{ include "philter.labels" . }}
+{{ include "philter.phEyeSelectorLabels" . }}
+{{- end }}
+
+{{/*
+phEye selector labels
+*/}}
+{{- define "philter.phEyeSelectorLabels" -}}
+{{ include "philter.selectorLabels" . }}
+app.kubernetes.io/component: ph-eye
+{{- end }}
