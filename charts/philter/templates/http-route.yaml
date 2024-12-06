@@ -20,18 +20,19 @@ spec:
   {{- end }}
   rules:
   {{- range .Values.httpRoute.paths }}
-    - matches:
-      - path:
-          type: {{ .type | default "PathPrefix" }}
-          value: {{ trimSuffix "/" .path }}/api
-        backendRefs:
+    - backendRefs:
         - name: {{ include "philter.apiFullname" $ }}
           port: {{ .port | default $.Values.api.service.port }}
-      - path:
+      matches:
+        - path:
+          type: {{ .type | default "PathPrefix" }}
+          value: {{ trimSuffix "/" .path }}/api
+    - backendRefs:
+        - name: {{ include "philter.uiFullname" $ }}
+          port: {{ .port | default $.Values.ui.service.port }}
+      matches:
+        - path:
           type: {{ .type | default "PathPrefix" }}
           value: {{ trimSuffix "/" .path }}/ui
-        backendRefs:
-        - name: {{ include "philter.fullname" $ }}
-          port: {{ .port | default $.Values.ui.service.port }}
   {{- end }}
 {{- end }}

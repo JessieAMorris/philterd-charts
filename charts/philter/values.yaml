@@ -32,6 +32,7 @@ httpRoute:
   enabled: false
   annotations: {}
   hostnames: []
+  parentRefs: []
   paths:
     - path: /
 
@@ -139,6 +140,8 @@ ui:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+
+  env: []
 
   service:
     type: ClusterIP
