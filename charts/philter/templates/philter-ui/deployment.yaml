@@ -1,3 +1,4 @@
+{{- $defaultApiEndpoint := printf "http://%s:%.f" (include "philter.apiFullname" $) .Values.api.service.port }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,8 +37,10 @@ spec:
             {{- toYaml .Values.ui.securityContext | nindent 12 }}
           image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.ui.image.pullPolicy }}
-          {{- with .Values.ui.env }}
           env:
+            - name: PHILTER_ENDPOINT
+              value: "{{ .Values.ui.apiEndpointOverride | default $defaultApiEndpoint }}"
+          {{- with .Values.ui.env }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:

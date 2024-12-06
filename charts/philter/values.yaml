@@ -143,6 +143,8 @@ ui:
 
   env: []
 
+  apiEndpointOverride:
+
   service:
     type: ClusterIP
     port: 9000
