@@ -2,7 +2,7 @@
 phEye fullname
 */}}
 {{- define "philter.phEyeFullname" -}}
-{{ include "philter.fullname" . }}-ph-eye-1
+{{ include "philter.fullname" . }}-ph-eye
 {{- end }}
 
 {{/*
