@@ -21,18 +21,24 @@ spec:
   rules:
   {{- range .Values.httpRoute.paths }}
     - backendRefs:
-        - name: {{ include "philter.apiFullname" $ }}
+        - group: ''
+          kind: Service
+          name: {{ include "philter.apiFullname" $ }}
           port: {{ .port | default $.Values.api.service.port }}
+          weight: 1
       matches:
         - path:
-          type: {{ .type | default "PathPrefix" }}
-          value: {{ trimSuffix "/" .path }}/api
+            type: {{ .type | default "PathPrefix" }}
+            value: {{ trimSuffix "/" .path }}/api
     - backendRefs:
-        - name: {{ include "philter.uiFullname" $ }}
+        - group: ''
+          kind: Service
+          name: {{ include "philter.uiFullname" $ }}
           port: {{ .port | default $.Values.ui.service.port }}
+          weight: 1
       matches:
         - path:
-          type: {{ .type | default "PathPrefix" }}
-          value: {{ trimSuffix "/" .path }}/ui
+            type: {{ .type | default "PathPrefix" }}
+            value: {{ trimSuffix "/" .path }}/
   {{- end }}
 {{- end }}
