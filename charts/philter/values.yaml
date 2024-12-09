@@ -151,6 +151,7 @@ api:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  command: ["java", "-jar", "/opt/philter/philter.jar"]
   args: []
 
   env: []
@@ -235,6 +236,7 @@ ui:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  command: ["java", "-jar", "/opt/philter/philter-ui.jar"]
   args: []
 
   env: []
@@ -322,8 +324,6 @@ phEye:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
-
-  args: []
 
   env: []
 
