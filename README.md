@@ -1,17 +1,21 @@
-# Helm Example Repository
+# Philterd Helm Charts
 
-Ahoy world!  I'm a Helm repository for example charts.
+Helm charts for [philterd](https://www.philterd.ai/).
 
 ## Get started
 
 Add this repository to Helm.
 
 ```
-helm repo add examples https://helm.github.io/examples
+helm repo add philterd https://JessieAMorris.github.io/philterd-charts
 ```
 
-Install an example.
+Install philter
 
 ```
-helm install ahoy examples/hello-world
+helm install philter philterd/philter
 ```
+
+## Configuration
+
+The best way to see all of the available configuration is in the [values.yaml](charts/philter/values.yaml) file.
