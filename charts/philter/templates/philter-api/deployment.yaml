@@ -46,11 +46,10 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
 
+          {{- with .Values.api.args }}
           args:
-            - "$JAVA_OPTS"
-            {{- with .Values.api.args }}
             {{- toYaml . | nindent 12 }}
-            {{- end }}
+          {{- end }}
 
           {{- with .Values.api.env }}
           env:

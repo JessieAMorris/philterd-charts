@@ -151,8 +151,15 @@ api:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-  command: ["java", "-jar", "/opt/philter/philter.jar"]
-  args: []
+  command:
+    - sh
+    - -c
+
+  args:
+    - java
+    - $JAVA_OPTS
+    - -jar
+    - philter.jar
 
   env: []
 
@@ -236,8 +243,14 @@ ui:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-  command: ["java", "-jar", "/opt/philter/philter-ui.jar"]
-  args: []
+  command:
+    - sh
+    - -c
+
+  args:
+    - java
+    - $JAVA_OPTS
+    - -jar
 
   env: []
 
