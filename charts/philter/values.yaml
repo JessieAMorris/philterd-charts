@@ -156,10 +156,7 @@ api:
     - -c
 
   args:
-    - java
-    - $JAVA_OPTS
-    - -jar
-    - philter.jar
+    - java $JAVA_OPTS -jar philter.jar
 
   env: []
 
@@ -248,10 +245,7 @@ ui:
     - -c
 
   args:
-    - java
-    - $JAVA_OPTS
-    - -jar
-    - philter-ui.jar
+    - java $JAVA_OPTS -jar philter-ui.jar
 
   env: []
 
