@@ -251,6 +251,7 @@ ui:
     - java
     - $JAVA_OPTS
     - -jar
+    - philter-ui.jar
 
   env: []
 
