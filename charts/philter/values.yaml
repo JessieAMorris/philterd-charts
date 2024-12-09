@@ -151,6 +151,8 @@ api:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  args: []
+
   env: []
 
   service:
@@ -232,6 +234,8 @@ ui:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+
+  args: []
 
   env: []
 
@@ -319,6 +323,8 @@ phEye:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  args: []
+
   env: []
 
   apiEndpointOverride:
@@ -337,10 +343,12 @@ phEye:
 
   # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
   livenessProbe:
+    initialDelaySeconds: 30
     httpGet:
       path: /status
       port: http
   readinessProbe:
+    initialDelaySeconds: 30
     httpGet:
       path: /status
       port: http

@@ -40,10 +40,18 @@ spec:
             {{- toYaml .Values.api.securityContext | nindent 12 }}
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.api.image.pullPolicy }}
+
+          args:
+            - "$JAVA_OPTS"
+            {{- with .Values.api.args }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+
           {{- with .Values.api.env }}
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+
           ports:
             - name: http
               containerPort: {{ .Values.api.service.port }}

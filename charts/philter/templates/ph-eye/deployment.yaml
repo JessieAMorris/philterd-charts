@@ -37,6 +37,12 @@ spec:
             {{- toYaml .Values.phEye.securityContext | nindent 12 }}
           image: "{{ .Values.phEye.image.repository }}:{{ .Values.phEye.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.phEye.image.pullPolicy }}
+
+          {{- with .Values.phEye.args }}
+          args:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
           {{- with .Values.phEye.env }}
           env:
             {{- toYaml . | nindent 12 }}
