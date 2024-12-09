@@ -1,0 +1,16 @@
+{{- if .Values.policies.createConfigMap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "philter.fullname" . }}-policies
+  labels:
+    {{- include "philter.labels" . | nindent 4 }}
+  {{- if .Values.policies.configMapAnnotations }}
+  annotations:
+    {{- with .Values.policies.configMapAnnotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+data:
+  {{- toYaml .Values.policies.data | nindent 2 }}
+{{- end }}

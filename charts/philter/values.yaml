@@ -27,6 +27,98 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+policies:
+  createConfigMap: true
+
+  configMapAnnotations: {}
+  
+  data:
+    default.json: |
+      {
+        "name": "default",
+        "config": {
+          "splitting": {
+            "enabled": true,
+            "threshold": 384,
+            "method": "width"
+          }
+        },
+        "ignored": [],
+        "identifiers": {
+          "dictionaries": [],
+          "person": {
+            "phEyeConfiguration": {
+              "endpoint": "http://philter-ph-eye:5000"
+            },
+            "personFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "age": {
+            "ageFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "creditCard": {
+            "creditCardFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "date": {
+            "dateFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "emailAddress": {
+            "emailAddressFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "ipAddress": {
+            "ipAddressFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "phoneNumber": {
+            "phoneNumberFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "ssn": {
+            "ssnFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "url": {
+            "urlFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "vin": {
+            "vinFilterStrategies": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          },
+          "zipCode": {
+            "zipCodeFilterStrategy": [{
+              "strategy": "REDACT",
+              "redactionFormat": "{{{REDACTED-%t}}}"
+            }]
+          }
+        }
+      }
+
+
 # This block is for setting up an HTTPRoute for more information can be found here: https://gateway-api.sigs.k8s.io/api-types/httproute/
 httpRoute:
   enabled: false

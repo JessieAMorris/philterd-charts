@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ include "philter.phEyeFullname" . }}
   labels:
-    {{- include "philter.labels" . | nindent 4 }}
+    {{- include "philter.phEyeLabels" . | nindent 4 }}
 spec:
   {{- if not .Values.phEye.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
