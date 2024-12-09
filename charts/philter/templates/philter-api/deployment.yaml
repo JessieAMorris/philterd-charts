@@ -56,7 +56,7 @@ spec:
             {{- toYaml .Values.api.resources | nindent 12 }}
           volumeMounts:
             {{- if .Values.policies.createConfigMap }}
-            - name: {{ include "philter.fullname" . }}-policies
+            - name: policies
               mountPath: "/opt/philter/policies/"
             {{- end }}
 
