@@ -7,7 +7,7 @@ Helm charts for [philterd](https://www.philterd.ai/).
 Add this repository to Helm.
 
 ```
-helm repo add philterd https://JessieAMorris.github.io/philterd-charts
+helm repo add philterd https://philterd.github.io/philterd-charts
 ```
 
 Install philter
